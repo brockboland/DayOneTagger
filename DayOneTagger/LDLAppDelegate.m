@@ -9,6 +9,7 @@
 #import "LDLAppDelegate.h"
 #import "DayOneEntry.h"
 #import "DayOneTag.h"
+#import "LDLMainView.h"
 
 @implementation LDLAppDelegate
 
@@ -23,13 +24,18 @@
   [fetchRequest setEntity:entity];
 
   NSError *error = nil;
-  NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-  if (fetchedObjects == nil) {
+  NSArray *fetchedResults = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+  if (fetchedResults == nil) {
     NSLog(@"Error loading entries");
   }
   else {
-    NSLog(@"Loaded %lu entries", [fetchedObjects count]);
+    NSLog(@"Loaded %lu entries", [fetchedResults count]);
   }
+
+  LDLMainView *mainView = (LDLMainView*)self.window.contentView;
+  mainView.entryList = fetchedResults;
+  mainView.currentEntryIndex = 0;
+  [mainView updateDisplay];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.luckydoglabs.DayOneTagger" in the user's Application Support directory.
@@ -220,5 +226,6 @@
 
   [self saveAction:nil];
 }
+
 
 @end

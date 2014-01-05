@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4660E02A1879E82C006E473E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4660E0291879E82C006E473E /* WebKit.framework */; };
+		4660E02D1879EF48006E473E /* LDLMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4660E02C1879EF48006E473E /* LDLMainView.m */; };
 		46C3311B187908250004312E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C3311A187908250004312E /* Cocoa.framework */; };
 		46C33125187908250004312E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 46C33123187908250004312E /* InfoPlist.strings */; };
 		46C33127187908250004312E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C33126187908250004312E /* main.m */; };
@@ -34,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4660E0291879E82C006E473E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		4660E02B1879EF48006E473E /* LDLMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDLMainView.h; sourceTree = "<group>"; };
+		4660E02C1879EF48006E473E /* LDLMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDLMainView.m; sourceTree = "<group>"; };
 		46C33117187908250004312E /* DayOneTagger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayOneTagger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C3311A187908250004312E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		46C3311D187908250004312E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -65,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4660E02A1879E82C006E473E /* WebKit.framework in Frameworks */,
 				46C3311B187908250004312E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,6 +109,7 @@
 		46C33119187908250004312E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4660E0291879E82C006E473E /* WebKit.framework */,
 				46C3311A187908250004312E /* Cocoa.framework */,
 				46C3313C187908250004312E /* XCTest.framework */,
 				46C3311C187908250004312E /* Other Frameworks */,
@@ -130,6 +137,8 @@
 				46C33132187908250004312E /* DayOneTagger.xcdatamodeld */,
 				46C33162187918210004312E /* Models */,
 				46C33121187908250004312E /* Supporting Files */,
+				4660E02B1879EF48006E473E /* LDLMainView.h */,
+				4660E02C1879EF48006E473E /* LDLMainView.m */,
 			);
 			path = DayOneTagger;
 			sourceTree = "<group>";
@@ -276,6 +285,7 @@
 			files = (
 				46C3315E18790EBF0004312E /* DayOneTag.m in Sources */,
 				46C33161187917DC0004312E /* DayOneEntry.m in Sources */,
+				4660E02D1879EF48006E473E /* LDLMainView.m in Sources */,
 				46C33134187908250004312E /* DayOneTagger.xcdatamodeld in Sources */,
 				46C33127187908250004312E /* main.m in Sources */,
 				46C3312E187908250004312E /* LDLAppDelegate.m in Sources */,
@@ -489,6 +499,7 @@
 				46C3314D187908250004312E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46C3314E187908250004312E /* Build configuration list for PBXNativeTarget "DayOneTaggerTests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +508,7 @@
 				46C33150187908250004312E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

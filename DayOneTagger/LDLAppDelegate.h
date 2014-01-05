@@ -16,7 +16,10 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
-- (IBAction)saveAction:(id)sender;
 - (IBAction)importEntries:(id)sender;
+
+- (IBAction)saveAction:(id)sender;
+
+
 
 @end
