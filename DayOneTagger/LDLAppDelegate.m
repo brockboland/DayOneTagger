@@ -18,24 +18,8 @@
 @synthesize managedObjectContext = _managedObjectContext;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-  // Load saved entries
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"DayOneEntry" inManagedObjectContext:self.managedObjectContext];
-  [fetchRequest setEntity:entity];
-
-  NSError *error = nil;
-  NSArray *fetchedResults = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-  if (fetchedResults == nil) {
-    NSLog(@"Error loading entries");
-  }
-  else {
-    NSLog(@"Loaded %lu entries", [fetchedResults count]);
-  }
-
   LDLMainView *mainView = (LDLMainView*)self.window.contentView;
-  mainView.entryList = fetchedResults;
-  mainView.currentEntryIndex = 0;
-  [mainView updateDisplay];
+  [mainView prepForDisplayWithManagedObjectContext:self.managedObjectContext];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.luckydoglabs.DayOneTagger" in the user's Application Support directory.
@@ -225,6 +209,10 @@
   }
 
   [self saveAction:nil];
+
+  // Update the display
+  LDLMainView *mainView = (LDLMainView*)self.window.contentView;
+  [mainView prepForDisplayWithManagedObjectContext:self.managedObjectContext];
 }
 
 

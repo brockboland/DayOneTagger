@@ -153,6 +153,34 @@ enum {
 
 @implementation LDLMainView
 
+- (void)prepForDisplayWithManagedObjectContext:(NSManagedObjectContext*)context {
+  self.managedObjectContext = context;
+
+
+  // Load saved entries
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"DayOneEntry" inManagedObjectContext:self.managedObjectContext];
+  [fetchRequest setEntity:entity];
+
+  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate"
+  ascending:YES];
+  NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+  [fetchRequest setSortDescriptors:sortDescriptors];
+
+  NSError *error = nil;
+  NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+  if (fetchedObjects == nil) {
+    NSLog(@"Error loading entries");
+  }
+  else {
+    NSLog(@"Loaded %lu entries", [fetchedObjects count]);
+  }
+
+  self.entryList = fetchedObjects;
+  self.currentEntryIndex = 0;
+  [self displayCurrentEntry];
+}
+
 -(BOOL)acceptsFirstResponder {
   return YES;
 }
@@ -209,7 +237,7 @@ enum {
 - (IBAction)prevEntry:(id)sender {
   if (self.currentEntryIndex > 0) {
     self.currentEntryIndex = self.currentEntryIndex - 1;
-    [self updateDisplay];
+    [self displayCurrentEntry];
   }
 }
 
@@ -218,17 +246,27 @@ enum {
   if (self.currentEntryIndex >= [self entryCount]) {
     self.currentEntryIndex = [self entryCount] - 1;
   }
-  [self updateDisplay];
+  [self displayCurrentEntry];
 }
 
-- (void)updateDisplay {
-  DayOneEntry *currentEntry = [self.entryList objectAtIndex:self.currentEntryIndex];
-  [self.entryTextView setString:currentEntry.text];
+- (void)displayCurrentEntry {
+  // Make sure we're looking at a valid index
+  if ([self entryCount] > self.currentEntryIndex) {
+    DayOneEntry *currentEntry = [self.entryList objectAtIndex:self.currentEntryIndex];
 
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-  [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-  [self.entryDateField setStringValue:[dateFormatter stringFromDate:currentEntry.creationDate]];
+    // Show the entry text
+    [self.entryTextView setString:currentEntry.text];
+
+    // Format and display the entry date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [self.entryDateField setStringValue:[dateFormatter stringFromDate:currentEntry.creationDate]];
+  }
+
+  // Show the "x of y" count at the bottom of the window
+  NSString *progressIndicator = [NSString stringWithFormat:@"Entry %lu of %lu", self.currentEntryIndex+1, (unsigned long)[self entryCount]];
+  [self.entryProgressIndicator setStringValue:progressIndicator];
 }
 
 

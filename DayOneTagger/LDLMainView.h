@@ -12,14 +12,16 @@
 
 @property (unsafe_unretained) IBOutlet NSTextView *entryTextView;
 @property (weak) IBOutlet NSTextField *entryDateField;
+@property (weak) IBOutlet NSTextField *entryProgressIndicator;
+@property (weak) NSManagedObjectContext *managedObjectContext;
 
 @property NSUInteger currentEntryIndex;
 @property (strong) NSArray *entryList;
 
 
+- (void)prepForDisplayWithManagedObjectContext:(NSManagedObjectContext*)context;
 - (IBAction)prevEntry:(id)sender;
 - (IBAction)nextEntry:(id)sender;
-
-- (void)updateDisplay;
+- (void)displayCurrentEntry;
 
 @end

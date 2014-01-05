@@ -62,6 +62,19 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Import" id="8uD-R7-ncj">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Import" id="Lhj-31-TvG">
+                        <items>
+                            <menuItem title="DayOne" id="jhd-9L-LJI">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="importEntries:" target="494" id="PYu-io-UWK"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="File" id="83">
                     <menu key="submenu" title="File" id="81">
                         <items>
@@ -655,17 +668,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="660" height="502"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NP3-qB-Elc">
-                        <rect key="frame" x="14" y="454" width="83" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="push" title="Import" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="4W4-Bk-toM">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="importEntries:" target="494" id="wze-1C-t06"/>
-                        </connections>
-                    </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T9o-s8-ybY">
                         <rect key="frame" x="471" y="13" width="70" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -720,7 +722,16 @@
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbY-pQ-Y2i">
                         <rect key="frame" x="140" y="463" width="397" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="PSG-ZN-3LK">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Date" id="PSG-ZN-3LK">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mEj-Sp-L9E">
+                        <rect key="frame" x="227" y="22" width="244" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="x of y" id="Zor-6J-BOa">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -729,6 +740,7 @@
                 </subviews>
                 <connections>
                     <outlet property="entryDateField" destination="gbY-pQ-Y2i" id="otp-a5-3aB"/>
+                    <outlet property="entryProgressIndicator" destination="mEj-Sp-L9E" id="XBb-mH-dXH"/>
                     <outlet property="entryTextView" destination="jls-mm-FfN" id="pM5-My-XUe"/>
                 </connections>
             </view>
@@ -741,5 +753,6 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
+        <userDefaultsController representsSharedInstance="YES" id="2vh-F1-dfF"/>
     </objects>
 </document>
