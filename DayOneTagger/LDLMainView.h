@@ -17,6 +17,8 @@
 
 @property NSUInteger currentEntryIndex;
 @property (strong) NSArray *entryList;
+@property (strong) NSMutableArray *tagList;
+@property (strong) NSMutableArray *tagButtons;
 
 
 - (void)prepForDisplayWithManagedObjectContext:(NSManagedObjectContext*)context;

@@ -153,6 +153,18 @@ enum {
 
 @implementation LDLMainView
 
+-(id)initWithCoder:(NSCoder *)aDecoder {
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    self.tagList = [[NSMutableArray alloc] initWithObjects:@"daylog", @"journal", @"travel", nil];
+    self.tagButtons = [[NSMutableArray alloc] init];
+
+    // Become first responder so that other buttons are not highlighted
+    [self becomeFirstResponder];
+  }
+  return self;
+}
+
 - (void)prepForDisplayWithManagedObjectContext:(NSManagedObjectContext*)context {
   self.managedObjectContext = context;
 
@@ -172,14 +184,66 @@ enum {
   if (fetchedObjects == nil) {
     NSLog(@"Error loading entries");
   }
-  else {
-    NSLog(@"Loaded %lu entries", [fetchedObjects count]);
-  }
 
   self.entryList = fetchedObjects;
   self.currentEntryIndex = 0;
   [self displayCurrentEntry];
+
+  // Reset to default tags
+  self.tagList = [[NSMutableArray alloc] initWithObjects:@"daylog", @"journal", @"travel", nil];
+
+  // Get any other tags that are in use in the CoreData store
+  NSFetchRequest *tagFetchRequest = [[NSFetchRequest alloc] init];
+  NSEntityDescription *tagEntity = [NSEntityDescription entityForName:@"DayOneTag" inManagedObjectContext:self.managedObjectContext];
+  [tagFetchRequest setEntity:tagEntity];
+  NSError *tagError = nil;
+  NSArray *tagFetchedObjects = [self.managedObjectContext executeFetchRequest:tagFetchRequest error:&tagError];
+  if (tagFetchedObjects == nil) {
+    NSLog(@"Error loading tags");
+  }
+  else {
+    for (id tag in tagFetchedObjects) {
+      NSString *tagText = [tag valueForKey:@"text"];
+      if (![self.tagList containsObject:tagText]) {
+        [self.tagList addObject:tagText];
+      }
+    }
+  }
+
+  [self addTagToggleButtons];
 }
+
+-(BOOL)isFlipped {
+  return YES;
+}
+
+- (void)addTagToggleButtons {
+  CGFloat runningTop = 30;
+
+  // Start the button counter with 1, so they correspond as expected to keypresses: those start at 1, not 0
+  NSUInteger buttonIndexCounter = 1;
+  // Put a blank object at 0, because it won't add at 1 if there is on 0
+  [self.tagButtons insertObject:@"" atIndex:0];
+
+  for (id tagName in self.tagList) {
+    // Create and place a button
+    NSButton *tagButton = [[NSButton alloc] initWithFrame:NSRectFromCGRect(CGRectMake(10, runningTop, 175, 32))];
+    [self addSubview:tagButton];
+    [tagButton setTitle:tagName];
+
+    // Make an on-off toggle button and start it in the off state
+    [tagButton setButtonType:NSPushOnPushOffButton];
+    [tagButton setBezelStyle:NSRoundedBezelStyle];
+    [tagButton setAllowsMixedState:NO];
+    [tagButton setState:NSOffState];
+
+    [self.tagButtons insertObject:tagButton atIndex:buttonIndexCounter];
+    buttonIndexCounter++;
+
+    runningTop += 32;
+  }
+}
+
 
 -(BOOL)acceptsFirstResponder {
   return YES;
@@ -252,6 +316,9 @@ enum {
 - (void)displayCurrentEntry {
   // Make sure we're looking at a valid index
   if ([self entryCount] > self.currentEntryIndex) {
+    // First, clear the tag toggle buttons
+    [self toggleAllTagsOff];
+
     DayOneEntry *currentEntry = [self.entryList objectAtIndex:self.currentEntryIndex];
 
     // Show the entry text
@@ -262,6 +329,8 @@ enum {
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [self.entryDateField setStringValue:[dateFormatter stringFromDate:currentEntry.creationDate]];
+
+    // @todo: toggle on buttons for tags on this entry
   }
 
   // Show the "x of y" count at the bottom of the window
@@ -271,7 +340,27 @@ enum {
 
 
 - (void)toggleTag:(NSUInteger)tagIndex {
-  NSLog(@"tag index to toggle: %lu", tagIndex);
+  @try {
+    NSButton *tagButton = [self.tagButtons objectAtIndex:tagIndex];
+    if (tagButton.state == NSOnState) {
+      tagButton.state = NSOffState;
+    }
+    else {
+      tagButton.state = NSOnState;
+    }
+  }
+  @catch (NSException *exception) {
+    // Trying to toggle a button that doens't exist
+  }
+}
+
+- (void)toggleAllTagsOff {
+  for (id item in self.tagButtons) {
+    if ([item isKindOfClass:[NSButton class]]) {
+      NSButton *tagButton = (NSButton*)item;
+      tagButton.state = NSOffState;
+    }
+  }
 }
 
 @end
