@@ -7,6 +7,7 @@
 //
 
 #import "DayOneEntry.h"
+#import "DayOneTag.h"
 
 
 @implementation DayOneEntry
@@ -15,6 +16,11 @@
 @dynamic creationDate;
 @dynamic starred;
 @dynamic uuid;
+@dynamic touched;
 @dynamic tags;
+
+-(void)awakeFromInsert {
+  self.touched = NO;
+}
 
 @end

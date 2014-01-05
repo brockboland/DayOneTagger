@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class DayOneTag;
 
 @interface DayOneEntry : NSManagedObject
 
@@ -16,13 +17,14 @@
 @property (nonatomic, retain) NSDate * creationDate;
 @property (nonatomic, retain) NSNumber * starred;
 @property (nonatomic, retain) NSString * uuid;
+@property (nonatomic, retain) NSNumber * touched;
 @property (nonatomic, retain) NSSet *tags;
 @end
 
 @interface DayOneEntry (CoreDataGeneratedAccessors)
 
-- (void)addTagsObject:(NSManagedObject *)value;
-- (void)removeTagsObject:(NSManagedObject *)value;
+- (void)addTagsObject:(DayOneTag *)value;
+- (void)removeTagsObject:(DayOneTag *)value;
 - (void)addTags:(NSSet *)values;
 - (void)removeTags:(NSSet *)values;
 

@@ -19,8 +19,8 @@
 		46C3313E187908250004312E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C3311A187908250004312E /* Cocoa.framework */; };
 		46C33146187908250004312E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 46C33144187908250004312E /* InfoPlist.strings */; };
 		46C33148187908250004312E /* DayOneTaggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C33147187908250004312E /* DayOneTaggerTests.m */; };
-		46C3315B18790EBE0004312E /* DayOneEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C3315A18790EBE0004312E /* DayOneEntry.m */; };
 		46C3315E18790EBF0004312E /* DayOneTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C3315D18790EBF0004312E /* DayOneTag.m */; };
+		46C33161187917DC0004312E /* DayOneEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C33160187917DC0004312E /* DayOneEntry.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,10 +54,10 @@
 		46C33143187908250004312E /* DayOneTaggerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DayOneTaggerTests-Info.plist"; sourceTree = "<group>"; };
 		46C33145187908250004312E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		46C33147187908250004312E /* DayOneTaggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DayOneTaggerTests.m; sourceTree = "<group>"; };
-		46C3315918790EBE0004312E /* DayOneEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayOneEntry.h; sourceTree = "<group>"; };
-		46C3315A18790EBE0004312E /* DayOneEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayOneEntry.m; sourceTree = "<group>"; };
 		46C3315C18790EBF0004312E /* DayOneTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayOneTag.h; sourceTree = "<group>"; };
 		46C3315D18790EBF0004312E /* DayOneTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayOneTag.m; sourceTree = "<group>"; };
+		46C3315F187917DC0004312E /* DayOneEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayOneEntry.h; sourceTree = "<group>"; };
+		46C33160187917DC0004312E /* DayOneEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayOneEntry.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,10 +128,7 @@
 				46C3312F187908250004312E /* MainMenu.xib */,
 				46C33135187908250004312E /* Images.xcassets */,
 				46C33132187908250004312E /* DayOneTagger.xcdatamodeld */,
-				46C3315C18790EBF0004312E /* DayOneTag.h */,
-				46C3315D18790EBF0004312E /* DayOneTag.m */,
-				46C3315918790EBE0004312E /* DayOneEntry.h */,
-				46C3315A18790EBE0004312E /* DayOneEntry.m */,
+				46C33162187918210004312E /* Models */,
 				46C33121187908250004312E /* Supporting Files */,
 			);
 			path = DayOneTagger;
@@ -165,6 +162,17 @@
 				46C33144187908250004312E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		46C33162187918210004312E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				46C3315F187917DC0004312E /* DayOneEntry.h */,
+				46C33160187917DC0004312E /* DayOneEntry.m */,
+				46C3315C18790EBF0004312E /* DayOneTag.h */,
+				46C3315D18790EBF0004312E /* DayOneTag.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,9 +275,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				46C3315E18790EBF0004312E /* DayOneTag.m in Sources */,
+				46C33161187917DC0004312E /* DayOneEntry.m in Sources */,
 				46C33134187908250004312E /* DayOneTagger.xcdatamodeld in Sources */,
 				46C33127187908250004312E /* main.m in Sources */,
-				46C3315B18790EBE0004312E /* DayOneEntry.m in Sources */,
 				46C3312E187908250004312E /* LDLAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
