@@ -7,6 +7,8 @@
 //
 
 #import "LDLAppDelegate.h"
+#import "DayOneEntry.h"
+#import "DayOneTag.h"
 
 @implementation LDLAppDelegate
 
@@ -14,9 +16,20 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-  // Insert code here to initialize your application
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+  // Load saved entries
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"DayOneEntry" inManagedObjectContext:self.managedObjectContext];
+  [fetchRequest setEntity:entity];
+
+  NSError *error = nil;
+  NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+  if (fetchedObjects == nil) {
+    NSLog(@"Error loading entries");
+  }
+  else {
+    NSLog(@"Loaded %lu entries", [fetchedObjects count]);
+  }
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.luckydoglabs.DayOneTagger" in the user's Application Support directory.
@@ -178,6 +191,34 @@
     }
 
     return NSTerminateNow;
+}
+
+// Import all entries from a journal into CoreData
+- (IBAction)importEntries:(id)sender {
+  NSString *entriesDirectory = @"/Users/bboland/Desktop/Journal.dayone/entries/";
+  NSArray *dirFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:entriesDirectory error:nil];
+  NSArray *entryFiles = [dirFiles filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.doentry'"]];
+
+  for (id filename in entryFiles) {
+    NSString *fullPath = [NSString stringWithFormat:@"%@%@", entriesDirectory, filename];
+
+    NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:fullPath];
+
+    DayOneEntry *entry = (DayOneEntry *)[NSEntityDescription insertNewObjectForEntityForName:@"DayOneEntry" inManagedObjectContext:[self managedObjectContext]];
+    entry.creationDate = (NSDate*)[contents objectForKey:@"Creation Date"];
+    entry.text = [contents objectForKey:@"Entry Text"];
+    entry.starred = (NSNumber *)[contents objectForKey:@"Starred"];
+    entry.uuid = [contents objectForKey:@"UUID"];
+
+    NSArray *tags = (NSArray *)[contents objectForKey:@"Tags"];
+    for (id tag in tags) {
+      DayOneTag *newTag = (DayOneTag *)[NSEntityDescription insertNewObjectForEntityForName:@"DayOneTag" inManagedObjectContext:[self managedObjectContext]];
+      newTag.text = tag;
+      [entry addTagsObject:newTag];
+    }
+  }
+
+  [self saveAction:nil];
 }
 
 @end
