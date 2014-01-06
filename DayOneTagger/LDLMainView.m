@@ -157,7 +157,7 @@ enum {
 -(id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
   if (self) {
-    self.defaultTagList = @[@"daylog", @"journal", @"travel", @"delete"];
+    self.defaultTagList = @[@"daylog", @"journal", @"travel", @"delete", @"review"];
     self.tagButtons = [[NSMutableArray alloc] init];
 
     // Become first responder so that other buttons are not highlighted
@@ -221,7 +221,8 @@ enum {
     // Create and place a button
     NSButton *tagButton = [[NSButton alloc] initWithFrame:NSRectFromCGRect(CGRectMake(10, runningTop, 175, 32))];
     [self addSubview:tagButton];
-    [tagButton setTitle:tagName];
+    [tagButton setTitle:[NSString stringWithFormat:@"%lu: %@", (unsigned long)buttonIndexCounter, tagName]];
+    [tagButton setTag:buttonIndexCounter-1];
 
     // Make an on-off toggle button and start it in the off state
     [tagButton setButtonType:NSPushOnPushOffButton];
@@ -329,7 +330,7 @@ enum {
     // Format and display the entry date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
     [self.entryDateField setStringValue:[dateFormatter stringFromDate:currentEntry.creationDate]];
 
     // Toggle on the tag buttons for tags already on the current entry
@@ -349,10 +350,10 @@ enum {
   DayOneEntry *currentEntry = [self.entryList objectAtIndex:self.currentEntryIndex];
   // State has already changed by the time this method runs
   if (tagButton.state == NSOnState) {
-    [currentEntry addTag:tagButton.title];
+    [currentEntry addTag:[self.tagList objectAtIndex:tagButton.tag]];
   }
   else {
-    [currentEntry removeTag:tagButton.title];
+    [currentEntry removeTag:[self.tagList objectAtIndex:tagButton.tag]];
   }
   [self.appDelegate saveAction:self];
 }
@@ -365,11 +366,11 @@ enum {
     NSButton *tagButton = [self.tagButtons objectAtIndex:tagIndex];
     if (tagButton.state == NSOnState) {
       tagButton.state = NSOffState;
-      [currentEntry removeTag:tagButton.title];
+      [currentEntry removeTag:[self.tagList objectAtIndex:tagIndex-1]];
     }
     else {
       tagButton.state = NSOnState;
-      [currentEntry addTag:tagButton.title];
+      [currentEntry addTag:[self.tagList objectAtIndex:tagIndex-1]];
     }
     [self.appDelegate saveAction:self];
   }
