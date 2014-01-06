@@ -290,10 +290,6 @@ enum {
     case kVK_ANSI_9:
       [self toggleTag:9];
       break;
-
-    case kVK_ANSI_S:
-      // @todo: skip
-      break;
   }
 }
 
