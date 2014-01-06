@@ -158,7 +158,7 @@ enum {
 -(id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
   if (self) {
-    self.tagList = [[NSMutableArray alloc] initWithObjects:@"daylog", @"journal", @"travel", nil];
+    self.defaultTagList = @[@"daylog", @"journal", @"travel"];
     self.tagButtons = [[NSMutableArray alloc] init];
 
     // Become first responder so that other buttons are not highlighted
@@ -191,7 +191,7 @@ enum {
   self.currentEntryIndex = 0;
 
   // Reset to default tags
-  self.tagList = [[NSMutableArray alloc] initWithObjects:@"daylog", @"journal", @"travel", nil];
+  self.tagList = [[NSMutableArray alloc] initWithArray:self.defaultTagList];
 
   // Get any other tags that are in use in the CoreData store
   NSFetchRequest *tagFetchRequest = [[NSFetchRequest alloc] init];

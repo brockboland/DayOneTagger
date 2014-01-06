@@ -20,6 +20,7 @@
 @property NSUInteger currentEntryIndex;
 @property (strong) NSArray *entryList;
 @property (strong) NSMutableArray *tagList;
+@property (strong) NSArray *defaultTagList;
 @property (strong) NSMutableArray *tagButtons;
 @property (weak) LDLAppDelegate *appDelegate;
 
