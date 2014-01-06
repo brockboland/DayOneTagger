@@ -243,11 +243,13 @@ enum {
     [tagButton setAllowsMixedState:NO];
     [tagButton setState:NSOffState];
 
+    [tagButton setTarget:self];
+    [tagButton setAction:@selector(tagButtonClick:)];
+
     [self.tagButtons insertObject:tagButton atIndex:buttonIndexCounter];
     buttonIndexCounter++;
 
     runningTop += 32;
-    // @todo: add click handler
   }
 }
 
@@ -344,7 +346,7 @@ enum {
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [self.entryDateField setStringValue:[dateFormatter stringFromDate:currentEntry.creationDate]];
 
-    // @todo: toggle on buttons for tags on this entry
+    // Toggle on the tag buttons for tags already on the current entry
     for (DayOneTag *tag in currentEntry.tags) {
       [self turnOnTag:tag.text];
     }
@@ -353,6 +355,20 @@ enum {
   // Show the "x of y" count at the bottom of the window
   NSString *progressIndicator = [NSString stringWithFormat:@"Entry %lu of %lu", self.currentEntryIndex+1, (unsigned long)[self entryCount]];
   [self.entryProgressIndicator setStringValue:progressIndicator];
+}
+
+
+// Toggle button click
+- (void)tagButtonClick:(NSButton *)tagButton {
+  DayOneEntry *currentEntry = [self.entryList objectAtIndex:self.currentEntryIndex];
+  // State has already changed by the time this method runs
+  if (tagButton.state == NSOnState) {
+    [currentEntry addTag:tagButton.title];
+  }
+  else {
+    [currentEntry removeTag:tagButton.title];
+  }
+  [self.appDelegate saveAction:self];
 }
 
 

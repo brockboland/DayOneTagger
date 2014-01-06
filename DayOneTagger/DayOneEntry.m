@@ -26,7 +26,7 @@
 // Add a tag to this entry. Just takes the string for the tag text
 - (void) addTag:(NSString *)tagText {
   for (DayOneTag *tag in self.tags) {
-    if (tag.text == tagText) {
+    if ([tag.text isEqualToString:tagText]) {
       // Tag is already on the object, so there's nothing to do
       return;
     }
@@ -41,7 +41,7 @@
 // Remove a tag for this entry. Just takes the string for the tag text
 - (void) removeTag:(NSString *)tagText {
   for (DayOneTag *tag in self.tags) {
-    if (tag.text == tagText) {
+    if ([tag.text isEqualToString:tagText]) {
       // Found the tag: remove it, and bail out of the loop
       [self removeTagsObject:tag];
       break;
