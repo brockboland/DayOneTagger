@@ -19,6 +19,9 @@
 @property (nonatomic, retain) NSString * uuid;
 @property (nonatomic, retain) NSNumber * touched;
 @property (nonatomic, retain) NSSet *tags;
+
+- (void) removeTag:(NSString *)tagText;
+- (void) addTag:(NSString *)tagText;
 @end
 
 @interface DayOneEntry (CoreDataGeneratedAccessors)

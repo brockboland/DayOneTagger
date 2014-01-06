@@ -19,6 +19,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
   LDLMainView *mainView = (LDLMainView*)self.window.contentView;
+  mainView.appDelegate = self;
   [mainView prepForDisplayWithManagedObjectContext:self.managedObjectContext];
 }
 

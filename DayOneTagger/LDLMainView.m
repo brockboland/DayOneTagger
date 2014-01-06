@@ -8,6 +8,8 @@
 
 #import "LDLMainView.h"
 #import "DayOneEntry.h"
+#import "DayOneTag.h"
+#import "LDLAppDelegate.h"
 
 
 
@@ -187,7 +189,6 @@ enum {
 
   self.entryList = fetchedObjects;
   self.currentEntryIndex = 0;
-  [self displayCurrentEntry];
 
   // Reset to default tags
   self.tagList = [[NSMutableArray alloc] initWithObjects:@"daylog", @"journal", @"travel", nil];
@@ -211,12 +212,17 @@ enum {
   }
 
   [self addTagToggleButtons];
+
+  // Finally, we are ready to show the first entry
+  [self displayCurrentEntry];
 }
 
+// Flip the grid so that 0,0 is at the top left, so that tag toggle buttons can be positioned more easily
 -(BOOL)isFlipped {
   return YES;
 }
 
+// Loop over the tag list and add a toggle button for each tag
 - (void)addTagToggleButtons {
   CGFloat runningTop = 30;
 
@@ -241,10 +247,11 @@ enum {
     buttonIndexCounter++;
 
     runningTop += 32;
+    // @todo: add click handler
   }
 }
 
-
+// Allow this view to become first responder, so that it gets the focus (might also be necessary to capture keypresses)
 -(BOOL)acceptsFirstResponder {
   return YES;
 }
@@ -294,10 +301,15 @@ enum {
     case kVK_ANSI_9:
       [self toggleTag:9];
       break;
+
+    case kVK_ANSI_S:
+      // @todo: skip
+      break;
   }
 }
 
 
+// Click handler for the Previous button. Also triggered by pressing the left arrow
 - (IBAction)prevEntry:(id)sender {
   if (self.currentEntryIndex > 0) {
     self.currentEntryIndex = self.currentEntryIndex - 1;
@@ -305,6 +317,7 @@ enum {
   }
 }
 
+// Click handler for the Next button. Also triggered by pressing the right arrow
 - (IBAction)nextEntry:(id)sender {
   self.currentEntryIndex = self.currentEntryIndex + 1;
   if (self.currentEntryIndex >= [self entryCount]) {
@@ -313,6 +326,7 @@ enum {
   [self displayCurrentEntry];
 }
 
+// Update the view to display the current entry
 - (void)displayCurrentEntry {
   // Make sure we're looking at a valid index
   if ([self entryCount] > self.currentEntryIndex) {
@@ -331,6 +345,9 @@ enum {
     [self.entryDateField setStringValue:[dateFormatter stringFromDate:currentEntry.creationDate]];
 
     // @todo: toggle on buttons for tags on this entry
+    for (DayOneTag *tag in currentEntry.tags) {
+      [self turnOnTag:tag.text];
+    }
   }
 
   // Show the "x of y" count at the bottom of the window
@@ -339,21 +356,37 @@ enum {
 }
 
 
+// Toggle a tag on or off for the current entry. Triggered by keypresses
 - (void)toggleTag:(NSUInteger)tagIndex {
   @try {
+    DayOneEntry *currentEntry = [self.entryList objectAtIndex:self.currentEntryIndex];
     NSButton *tagButton = [self.tagButtons objectAtIndex:tagIndex];
     if (tagButton.state == NSOnState) {
       tagButton.state = NSOffState;
+      [currentEntry removeTag:tagButton.title];
     }
     else {
       tagButton.state = NSOnState;
+      [currentEntry addTag:tagButton.title];
     }
+    [self.appDelegate saveAction:self];
   }
   @catch (NSException *exception) {
     // Trying to toggle a button that doens't exist
   }
 }
 
+// Turn on the tag toggle button for hte given tag name
+- (void) turnOnTag:(NSString *)tagText {
+  NSUInteger tagIndex = [self.tagList indexOfObject:tagText];
+  if (tagIndex != NSNotFound) {
+    // Add one to the tag index, since the tagButton array starts at 1 to correspond with keyboard shortcuts
+    NSButton *tagButton = [self.tagButtons objectAtIndex:tagIndex+1];
+    tagButton.state = NSOnState;
+  }
+}
+
+// "Clear" all tag toggles by switching them off
 - (void)toggleAllTagsOff {
   for (id item in self.tagButtons) {
     if ([item isKindOfClass:[NSButton class]]) {

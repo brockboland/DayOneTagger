@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class LDLAppDelegate;
+
 @interface LDLMainView : NSView
 
 @property (unsafe_unretained) IBOutlet NSTextView *entryTextView;
@@ -19,6 +21,7 @@
 @property (strong) NSArray *entryList;
 @property (strong) NSMutableArray *tagList;
 @property (strong) NSMutableArray *tagButtons;
+@property (weak) LDLAppDelegate *appDelegate;
 
 
 - (void)prepForDisplayWithManagedObjectContext:(NSManagedObjectContext*)context;
