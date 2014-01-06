@@ -184,8 +184,8 @@
     return NSTerminateNow;
 }
 
-// Import all entries from a journal into CoreData
-- (IBAction)importEntries:(id)sender {
+// Import all entries from Day One into CoreData
+- (IBAction)importDayOneEntries:(id)sender {
   NSString *entriesDirectory = @"/Users/bboland/Desktop/Journal.dayone/entries/";
   NSArray *dirFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:entriesDirectory error:nil];
   NSArray *entryFiles = [dirFiles filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.doentry'"]];
@@ -216,5 +216,22 @@
   [mainView prepForDisplayWithManagedObjectContext:self.managedObjectContext];
 }
 
+// Export Day One entries
+- (IBAction)exportDayOneEntries:(id)sender {
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"DayOneEntry" inManagedObjectContext:self.managedObjectContext];
+  [fetchRequest setEntity:entity];
+
+  NSError *error = nil;
+  NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+  if (fetchedObjects == nil) {
+    NSLog(@"Failed to load all items");
+  }
+  else {
+    for (DayOneEntry* entry in fetchedObjects) {
+      [entry saveAsDayOneEntry];
+    }
+  }
+}
 
 @end

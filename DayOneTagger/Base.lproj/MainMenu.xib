@@ -62,19 +62,6 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Import" id="8uD-R7-ncj">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Import" id="Lhj-31-TvG">
-                        <items>
-                            <menuItem title="DayOne" id="jhd-9L-LJI">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="importEntries:" target="494" id="PYu-io-UWK"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
-                </menuItem>
                 <menuItem title="File" id="83">
                     <menu key="submenu" title="File" id="81">
                         <items>
@@ -87,6 +74,19 @@
                                 <connections>
                                     <action selector="openDocument:" target="-1" id="374"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem title="Import" id="6DO-Ua-i0n">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Import" id="3y4-0z-rew">
+                                    <items>
+                                        <menuItem title="Day One" id="jhd-9L-LJI">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="importDayOneEntries:" target="494" id="tsW-wq-waj"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                             </menuItem>
                             <menuItem title="Open Recent" id="124">
                                 <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="125">
@@ -111,6 +111,19 @@
                                 <connections>
                                     <action selector="saveDocument:" target="-1" id="362"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem title="Export" id="oKA-Sx-fQn">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Export" id="zHC-rf-Jrf">
+                                    <items>
+                                        <menuItem title="Day One" id="lIv-CP-pqU">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="exportDayOneEntries:" target="494" id="g80-TL-vE7"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                             </menuItem>
                             <menuItem title="Revert to Saved" id="112">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -715,7 +728,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="wp3-EC-hmc">
-                            <rect key="frame" x="599" y="1" width="16" height="569"/>
+                            <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>

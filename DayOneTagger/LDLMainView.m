@@ -400,6 +400,8 @@ enum {
 }
 
 
+// Click handler for the segment control
+// Change the filtering on the entry list
 - (IBAction)changedFilter:(NSSegmentedControl*)sender {
   if ([sender selectedSegment] != self.currentFiltering) {
     switch ([sender selectedSegment]) {

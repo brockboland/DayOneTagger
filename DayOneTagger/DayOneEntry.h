@@ -22,6 +22,8 @@
 
 - (void) removeTag:(NSString *)tagText;
 - (void) addTag:(NSString *)tagText;
+
+- (void) saveAsDayOneEntry;
 @end
 
 @interface DayOneEntry (CoreDataGeneratedAccessors)
