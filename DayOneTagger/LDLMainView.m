@@ -152,13 +152,12 @@ enum {
 
 
 
-
 @implementation LDLMainView
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
   if (self) {
-    self.defaultTagList = @[@"daylog", @"journal", @"travel"];
+    self.defaultTagList = @[@"daylog", @"journal", @"travel", @"delete"];
     self.tagButtons = [[NSMutableArray alloc] init];
 
     // Become first responder so that other buttons are not highlighted
@@ -170,24 +169,11 @@ enum {
 - (void)prepForDisplayWithManagedObjectContext:(NSManagedObjectContext*)context {
   self.managedObjectContext = context;
 
-
+  // Start off filtering on All
+  self.currentFiltering = 0;
   // Load saved entries
-  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"DayOneEntry" inManagedObjectContext:self.managedObjectContext];
-  [fetchRequest setEntity:entity];
+  [self updateEntryList:nil];
 
-  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate"
-  ascending:YES];
-  NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-  [fetchRequest setSortDescriptors:sortDescriptors];
-
-  NSError *error = nil;
-  NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-  if (fetchedObjects == nil) {
-    NSLog(@"Error loading entries");
-  }
-
-  self.entryList = fetchedObjects;
   self.currentEntryIndex = 0;
 
   // Reset to default tags
@@ -409,6 +395,60 @@ enum {
       NSButton *tagButton = (NSButton*)item;
       tagButton.state = NSOffState;
     }
+  }
+}
+
+
+- (IBAction)changedFilter:(NSSegmentedControl*)sender {
+  if ([sender selectedSegment] != self.currentFiltering) {
+    switch ([sender selectedSegment]) {
+      case 0:
+        // All items
+        [self updateEntryList:nil];
+        break;
+      case 1:
+        // Untagged
+        [self updateEntryList:[NSPredicate predicateWithFormat:@"tags.@count == 0"]];
+        break;
+      case 2:
+        // Tagged
+        [self updateEntryList:[NSPredicate predicateWithFormat:@"tags.@count > 0"]];
+        break;
+    }
+
+    self.currentFiltering = [sender selectedSegment];
+
+    // Display the first item
+    self.currentEntryIndex = 0;
+    [self displayCurrentEntry];
+  }
+}
+
+
+// Update the entry list. Takes a filtering predicate; if nil, all entries are returned
+- (void)updateEntryList:(NSPredicate *)predicate {
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"DayOneEntry" inManagedObjectContext:self.managedObjectContext];
+  [fetchRequest setEntity:entity];
+
+  // Add the filtering predicate, if there is one
+  if (predicate != nil) {
+    [fetchRequest setPredicate:predicate];
+  }
+
+  // Sort by creation date
+  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES];
+  NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+  [fetchRequest setSortDescriptors:sortDescriptors];
+
+
+  NSError *error = nil;
+  NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+  if (fetchedObjects == nil) {
+    NSLog(@"Error updating result set");
+  }
+  else {
+    self.entryList = fetchedObjects;
   }
 }
 

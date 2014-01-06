@@ -23,11 +23,13 @@
 @property (strong) NSArray *defaultTagList;
 @property (strong) NSMutableArray *tagButtons;
 @property (weak) LDLAppDelegate *appDelegate;
+@property NSInteger currentFiltering;
 
 
 - (void)prepForDisplayWithManagedObjectContext:(NSManagedObjectContext*)context;
 - (IBAction)prevEntry:(id)sender;
 - (IBAction)nextEntry:(id)sender;
 - (void)displayCurrentEntry;
+- (IBAction)changedFilter:(NSSegmentedControl*)sender;
 
 @end
