@@ -51,28 +51,24 @@
 
 
 - (void) saveAsDayOneEntry {
-  NSMutableDictionary *values = [[NSMutableDictionary alloc] init];
-  [values setValue:self.creationDate forKey:@"Creation Date"];
-  [values setValue:self.text forKey:@"Entry Text"];
-  [values setValue:self.uuid forKey:@"UUID"];
-
-  if ([self.starred intValue] > 0) {
-    [values setValue:@YES forKey:@"Starred"];
-  }
-  else {
-    [values setValue:@NO forKey:@"Starred"];
-  }
-
+  // Only update the entry
   if ([self.tags count] > 0) {
     NSMutableArray *tags = [[NSMutableArray alloc] init];
     for (DayOneTag *tag in self.tags) {
       [tags addObject:tag.text];
     }
-    [values setValue:tags forKey:@"Tags"];
-  }
 
-  NSString *filename = [NSString stringWithFormat:@"%@%@.doentry", @"/Users/bboland/Desktop/Testing/", self.uuid];
-  [values writeToFile:filename atomically:YES];
+    // @todo: replace with directory that is selected in file dialog
+    NSString *entriesDirectory = @"/Users/bboland/Desktop/Journal.dayone/entries/";
+    // @todo: check if file exists, and create full NSDictionary for all values if it does not
+    NSString *fullPath = [NSString stringWithFormat:@"%@%@.doentry", entriesDirectory, self.uuid];
+    NSDictionary *contents = [NSDictionary dictionaryWithContentsOfFile:fullPath];
+
+    // Overwrite the old tags in the entry
+    [contents setValue:tags forKey:@"Tags"];
+    // Re-save
+    [contents writeToFile:fullPath atomically:YES];
+  }
 }
 
 @end

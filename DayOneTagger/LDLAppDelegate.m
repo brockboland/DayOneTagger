@@ -186,6 +186,7 @@
 
 // Import all entries from Day One into CoreData
 - (IBAction)importDayOneEntries:(id)sender {
+  // @todo: use directory from file dialog
   NSString *entriesDirectory = @"/Users/bboland/Desktop/Journal.dayone/entries/";
   NSArray *dirFiles = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:entriesDirectory error:nil];
   NSArray *entryFiles = [dirFiles filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.doentry'"]];
