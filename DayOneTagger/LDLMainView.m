@@ -322,6 +322,7 @@ enum {
 
     // Show the entry text
     [self.entryTextView setString:currentEntry.text];
+    [self.entryTextView setEditable:NO];
 
     // Format and display the entry date
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

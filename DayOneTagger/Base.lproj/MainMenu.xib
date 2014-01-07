@@ -728,7 +728,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="wp3-EC-hmc">
-                            <rect key="frame" x="-15" y="1" width="16" height="0.0"/>
+                            <rect key="frame" x="599" y="1" width="16" height="569"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
