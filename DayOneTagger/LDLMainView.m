@@ -239,16 +239,13 @@
 - (IBAction)changedFilter:(NSSegmentedControl*)sender {
   if ([sender selectedSegment] != self.currentFiltering) {
     switch ([sender selectedSegment]) {
-      case 0:
-        // All items
+      case LDLItemToggleAll:
         [self updateEntryList:nil];
         break;
-      case 1:
-        // Untagged
+      case LDLItemToggleUntagged:
         [self updateEntryList:[NSPredicate predicateWithFormat:@"tags.@count == 0"]];
         break;
-      case 2:
-        // Tagged
+      case LDLItemToggleTagged:
         [self updateEntryList:[NSPredicate predicateWithFormat:@"tags.@count > 0"]];
         break;
     }

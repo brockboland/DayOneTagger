@@ -18,6 +18,13 @@ enum {
   kVK_UpArrow                   = 0x7E
 };
 
+typedef NS_ENUM(NSInteger, LDLItemToggle) {
+  LDLItemToggleAll = 0,
+  LDLItemToggleUntagged = 1,
+  LDLItemToggleTagged = 2
+};
+
+
 
 @interface LDLMainView : NSView
 
