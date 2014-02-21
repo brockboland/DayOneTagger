@@ -10,6 +10,15 @@
 
 @class LDLAppDelegate;
 
+// Virtual keycodes. From http://snipplr.com/view/42797/
+enum {
+  kVK_LeftArrow                 = 0x7B,
+  kVK_RightArrow                = 0x7C,
+  kVK_DownArrow                 = 0x7D,
+  kVK_UpArrow                   = 0x7E
+};
+
+
 @interface LDLMainView : NSView
 
 @property (unsafe_unretained) IBOutlet NSTextView *entryTextView;
