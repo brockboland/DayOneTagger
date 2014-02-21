@@ -136,9 +136,9 @@
 				46C33135187908250004312E /* Images.xcassets */,
 				46C33132187908250004312E /* DayOneTagger.xcdatamodeld */,
 				46C33162187918210004312E /* Models */,
-				46C33121187908250004312E /* Supporting Files */,
 				4660E02B1879EF48006E473E /* LDLMainView.h */,
 				4660E02C1879EF48006E473E /* LDLMainView.m */,
+				46C33121187908250004312E /* Supporting Files */,
 			);
 			path = DayOneTagger;
 			sourceTree = "<group>";

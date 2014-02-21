@@ -188,28 +188,27 @@
         </menu>
         <window title="DayOneTagger" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="843" height="507"/>
+            <rect key="contentRect" x="421" y="242" width="732" height="479"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" id="372" customClass="LDLMainView">
-                <rect key="frame" x="0.0" y="0.0" width="843" height="507"/>
+                <rect key="frame" x="0.0" y="0.0" width="732" height="479"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Lu-L8-gJO">
-                        <rect key="frame" x="191" y="61" width="632" height="372"/>
+                        <rect key="frame" x="191" y="61" width="521" height="344"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" id="Hes-D5-zAb">
-                            <rect key="frame" x="1" y="1" width="630" height="370"/>
+                            <rect key="frame" x="1" y="1" width="519" height="342"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="jls-mm-FfN">
-                                    <rect key="frame" x="0.0" y="0.0" width="630" height="370"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="519" height="342"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="630" height="370"/>
+                                    <size key="minSize" width="519" height="342"/>
                                     <size key="maxSize" width="854" height="10000000"/>
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="630" height="370"/>
+                                    <size key="minSize" width="519" height="342"/>
                                     <size key="maxSize" width="854" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -220,7 +219,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="wp3-EC-hmc">
-                            <rect key="frame" x="615" y="1" width="16" height="370"/>
+                            <rect key="frame" x="504" y="1" width="16" height="342"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
@@ -239,7 +238,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T9o-s8-ybY">
-                        <rect key="frame" x="727" y="13" width="102" height="32"/>
+                        <rect key="frame" x="616" y="13" width="102" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="vDa-cs-jRt"/>
@@ -253,7 +252,7 @@
                         </connections>
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbY-pQ-Y2i">
-                        <rect key="frame" x="189" y="441" width="397" height="17"/>
+                        <rect key="frame" x="189" y="413" width="397" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Date" id="PSG-ZN-3LK">
                             <font key="font" metaFont="system"/>
@@ -262,7 +261,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mEj-Sp-L9E">
-                        <rect key="frame" x="289" y="22" width="436" height="17"/>
+                        <rect key="frame" x="289" y="22" width="325" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="x of y" id="Zor-6J-BOa">
                             <font key="font" metaFont="system"/>
@@ -271,7 +270,7 @@
                         </textFieldCell>
                     </textField>
                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vXA-dH-M5a">
-                        <rect key="frame" x="411" y="464" width="192" height="24"/>
+                        <rect key="frame" x="356" y="436" width="192" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <segmentedCell key="cell" alignment="left" style="rounded" trackingMode="selectOne" id="SDw-dh-D4E">
                             <font key="font" metaFont="system"/>
