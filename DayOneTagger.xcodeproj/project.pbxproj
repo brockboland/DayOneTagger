@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4660E02A1879E82C006E473E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4660E0291879E82C006E473E /* WebKit.framework */; };
 		4660E02D1879EF48006E473E /* LDLMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4660E02C1879EF48006E473E /* LDLMainView.m */; };
+		468646ED18B84A0500938ADE /* LDLTagButtonContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 468646EC18B84A0500938ADE /* LDLTagButtonContainerView.m */; };
 		46C3311B187908250004312E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46C3311A187908250004312E /* Cocoa.framework */; };
 		46C33125187908250004312E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 46C33123187908250004312E /* InfoPlist.strings */; };
 		46C33127187908250004312E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46C33126187908250004312E /* main.m */; };
@@ -39,6 +40,8 @@
 		4660E0291879E82C006E473E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		4660E02B1879EF48006E473E /* LDLMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDLMainView.h; sourceTree = "<group>"; };
 		4660E02C1879EF48006E473E /* LDLMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDLMainView.m; sourceTree = "<group>"; };
+		468646EB18B84A0500938ADE /* LDLTagButtonContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDLTagButtonContainerView.h; sourceTree = "<group>"; };
+		468646EC18B84A0500938ADE /* LDLTagButtonContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDLTagButtonContainerView.m; sourceTree = "<group>"; };
 		46C33117187908250004312E /* DayOneTagger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayOneTagger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C3311A187908250004312E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		46C3311D187908250004312E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -138,6 +141,8 @@
 				46C33162187918210004312E /* Models */,
 				4660E02B1879EF48006E473E /* LDLMainView.h */,
 				4660E02C1879EF48006E473E /* LDLMainView.m */,
+				468646EB18B84A0500938ADE /* LDLTagButtonContainerView.h */,
+				468646EC18B84A0500938ADE /* LDLTagButtonContainerView.m */,
 				46C33121187908250004312E /* Supporting Files */,
 			);
 			path = DayOneTagger;
@@ -302,6 +307,7 @@
 			files = (
 				46C3315E18790EBF0004312E /* DayOneTag.m in Sources */,
 				46C33161187917DC0004312E /* DayOneEntry.m in Sources */,
+				468646ED18B84A0500938ADE /* LDLTagButtonContainerView.m in Sources */,
 				4660E02D1879EF48006E473E /* LDLMainView.m in Sources */,
 				46C33134187908250004312E /* DayOneTagger.xcdatamodeld in Sources */,
 				46C33127187908250004312E /* main.m in Sources */,

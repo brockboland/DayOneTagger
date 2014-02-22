@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class LDLAppDelegate;
+@class LDLAppDelegate, LDLTagButtonContainerView;
 
 // Virtual keycodes. From http://snipplr.com/view/42797/
 enum {
@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, LDLItemToggle) {
 @property (unsafe_unretained) IBOutlet NSTextView *entryTextView;
 @property (weak) IBOutlet NSTextField *entryDateField;
 @property (weak) IBOutlet NSTextField *entryProgressIndicator;
+@property (weak) IBOutlet LDLTagButtonContainerView *tagButtonContainer;
 @property (weak) NSManagedObjectContext *managedObjectContext;
 
 @property NSUInteger currentEntryIndex;

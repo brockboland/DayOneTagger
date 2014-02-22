@@ -10,6 +10,7 @@
 #import "DayOneEntry.h"
 #import "DayOneTag.h"
 #import "LDLAppDelegate.h"
+#import "LDLTagButtonContainerView.h"
 
 @implementation LDLMainView
 
@@ -62,7 +63,7 @@
   [self displayCurrentEntry];
 }
 
-// Flip the grid so that 0,0 is at the top left, so that tag toggle buttons can be positioned more easily
+// Flip the grid so that origin is at the top left, so that tag toggle buttons can be positioned more easily
 -(BOOL)isFlipped {
   return YES;
 }
@@ -78,15 +79,13 @@
 
   for (id tagName in self.tagList) {
     // Create and place a button
-    NSButton *tagButton = [[NSButton alloc] initWithFrame:NSRectFromCGRect(CGRectMake(10, runningTop, 175, 32))];
-    [self addSubview:tagButton];
+    NSButton *tagButton = [[NSButton alloc] initWithFrame:NSRectFromCGRect(CGRectMake(0, runningTop, 140, 32))];
+    [self.tagButtonContainer addSubview:tagButton];
     [tagButton setTitle:[NSString stringWithFormat:@"%lu: %@", (unsigned long)buttonIndexCounter, tagName]];
     [tagButton setTag:buttonIndexCounter-1];
 
     // Make an on-off toggle button and start it in the off state
-    [tagButton setButtonType:NSPushOnPushOffButton];
-    [tagButton setBezelStyle:NSRoundedBezelStyle];
-    [tagButton setAllowsMixedState:NO];
+    [tagButton setButtonType:NSSwitchButton];
     [tagButton setState:NSOffState];
 
     [tagButton setTarget:self];
