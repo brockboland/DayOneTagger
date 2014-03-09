@@ -5,7 +5,16 @@ This is getting close to usable, but there are some pretty important pieces to s
 ## Goal
 My intent here is to make a utility app that will allow you to quickly flip through DayOne entries and quickly tag each one with a single keypress.
 
-In my case, I've got some 2200 entries in DayOne, and they roughly fall into two different categories. I'd like to start using DayOne for more types of entries, though, so I'd like to get my existing journal in order. The idea is that I will see one entry and hit the 1 or 2 key to tag it as one of those two types, then hit the arrow key to move to the next entry. This should make for quick
+DayOne doesn't include a really quick way to tag an entry. Right now, this is the process:
+- Cmd+E to edit the entry
+- Cmd+T to open the tag dialog
+- Type part of the tag
+- Down arrow to select the tag
+- Enter to choose it
+- Esc to close the tag dialog
+- Cmd+S to save the entry
+
+In my case, I've got over 2500 entries in DayOne, and they roughly fall into three or four different categories. I'd like to start using DayOne for more types of entries, though, so I'd like to get my existing journal in order. The app will display all untagged entries, one at a time, with a list of toggle buttons to the side. Just hit the number keys for the tags to add (or remove) on the entry, then hit the right arrow key to move on to the next one.
 
 ## Warning
 **This thing comes with no wraranty whatsoever. Use at your own risk. For serious. Back up your data.**
