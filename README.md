@@ -1,4 +1,4 @@
-Very much a work in progress. Hopefully, it will eventually be "done"…ish.
+Very much a work in progress. I've been cobbling this together in my spare time, though it's now been a few months since I've had any time for it.
 
 This is getting close to usable, but there are some pretty important pieces to sort out before it will be useful to anyone but me. [See the issue queue](https://github.com/brockboland/DayOneTagger/issues) for current tasks, and feel free to add more.
 
